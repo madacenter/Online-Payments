@@ -32,7 +32,7 @@ public with sharing class ClassFactory {
     }
     
     public OnlinePaymentPaypal makeOPPaypal( OnlinePayment.APIAuthorization auth, string testName ) {
-        if (Test.IsRunningTest()) {
+        if (System.Test.IsRunningTest()) {
             OnlinePaymentPaypalTest.testName = testName;         
             return new OnlinePaymentPaypalTest( auth );              
         } else {
@@ -41,7 +41,7 @@ public with sharing class ClassFactory {
     }
         
     public OnlinePaymentAuthnet makeOPAuthnet( OnlinePayment.APIAuthorization auth, string testName ) {
-        if (Test.IsRunningTest()) {
+        if (System.Test.IsRunningTest()) {
             OnlinePaymentAuthnetTest.testName = testName;         
             return new OnlinePaymentAuthnetTest( auth );              
         } else {
