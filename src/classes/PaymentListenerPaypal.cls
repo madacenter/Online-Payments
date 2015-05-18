@@ -441,7 +441,7 @@ global virtual class PaymentListenerPaypal {
 
 	// having these two methods separate allows them to be overridden for tests
 	protected virtual HttpResponse execute(HttpRequest req) {
-		if (test.isRunningTest()) {
+		if (System.test.isRunningTest()) {
 			return new HttpResponse();			
 		} else {
 			return new http().send(req);
@@ -449,7 +449,7 @@ global virtual class PaymentListenerPaypal {
 	}
 	
 	protected virtual String getResponseBody(HttpResponse r) {
-		if (test.isRunningTest()) {
+		if (System.test.isRunningTest()) {
 			return 'VERIFIED';			
 		} else {
 			return r.getBody();
@@ -464,7 +464,7 @@ global virtual class PaymentListenerPaypal {
 	static testMethod void testIPN () {
 		
 		PageReference pageRef=Page.PaymentListenerPaypal; 
-        Test.setCurrentPage(pageRef); 
+        System.Test.setCurrentPage(pageRef); 
 
 		// use the IPN tester class - overrides the real controller class, 
 		// but without actual callouts to paypal
@@ -500,7 +500,7 @@ global virtual class PaymentListenerPaypal {
 		ppn = new PaymentListenerPaypal();
 
 		// process it 
-		test.startTest();
+		System.test.startTest();
 		ppn.processNotification();
 		
 		// delay validation until we can call stopTest to allow the batch to run.
@@ -525,7 +525,7 @@ global virtual class PaymentListenerPaypal {
 		ppn.processNotification();
 		
 		// done processing ipn's, so let our batch run!
-		test.stopTest();
+		System.test.stopTest();
 
 		// verify first ipn was logged		 
 		payment_notification__c ipn;
@@ -549,13 +549,13 @@ global virtual class PaymentListenerPaypal {
 	static testMethod void testManyIPN () {
 		
 		PageReference pageRef=Page.PaymentListenerPaypal; 
-        Test.setCurrentPage(pageRef); 
+        System.Test.setCurrentPage(pageRef); 
 
 		// use the IPN tester class - overrides the real controller class, 
 		// but without actual callouts to paypal
 		PaymentListenerPaypal ppn;
 				
-		test.startTest();
+		System.test.startTest();
 		integer cIPN = 3; // 6 hit soql limits, so lowered to 3.
 		for (integer i = 1; i <= cIPN; i++) {
 		
@@ -584,7 +584,7 @@ global virtual class PaymentListenerPaypal {
 		}
 
 		// done processing ipn's, so let our batch run!
-		test.stopTest();
+		System.test.stopTest();
 
 		// validation
 		list<Payment_Notification__c> listIpn = [select Id from Payment_Notification__c where Transaction_Id__c like 'testing123-%'];
@@ -597,13 +597,13 @@ global virtual class PaymentListenerPaypal {
 	static testMethod void testRecurringIPN () {
 		
 		PageReference pageRef=Page.PaymentListenerPaypal; 
-        Test.setCurrentPage(pageRef); 
+        System.Test.setCurrentPage(pageRef); 
 
 		// use the IPN tester class - overrides the real controller class, 
 		// but without actual callouts to paypal
 		PaymentListenerPaypal ppn;
 				
-		test.startTest();
+		System.test.startTest();
 		integer cIPN = 4;	// when tried to deploy with 24, only 15 opps created.  not sure what went wrong. 
 		for (integer i = 1; i <= cIPN; i++) {
 		
@@ -638,7 +638,7 @@ global virtual class PaymentListenerPaypal {
 		}
 
 		// done processing ipn's, so let our batch run!
-		test.stopTest();
+		System.test.stopTest();
 
 		// validation
 		list<Payment_Notification__c> listIpn = [select Id from Payment_Notification__c where Transaction_Id__c like 'RecurringTxnId%'];

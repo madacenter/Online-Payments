@@ -324,7 +324,7 @@ global virtual class PaymentListenerAuthnet {
     static testMethod void testIPN () {
         
         PageReference pageRef=Page.PaymentListenerAuthnet; 
-        Test.setCurrentPage(pageRef); 
+        System.Test.setCurrentPage(pageRef); 
 
         // for code coverage, test opening the page with no params 
         PaymentListenerAuthnet ann = new PaymentListenerAuthnet();
@@ -492,7 +492,7 @@ global virtual class PaymentListenerAuthnet {
     static testMethod void testAuthOnlyThenCapture () {
         
         PageReference pageRef=Page.PaymentListenerAuthnet; 
-        Test.setCurrentPage(pageRef); 
+        System.Test.setCurrentPage(pageRef); 
         
         // for code coverage, test opening the page with no params 
         PaymentListenerAuthnet ann = new PaymentListenerAuthnet();
@@ -572,7 +572,7 @@ global virtual class PaymentListenerAuthnet {
         ann.processNotification();
 
         // assume that this code was scheduled and ran as expected
-        Test.startTest();
+        System.Test.startTest();
         OnlinePaymentAuthnetAsync batch = new OnlinePaymentAuthnetAsync(
             'SELECT id, gwop__Transaction_Type__c, gwop__Transaction_Id__c, gwop__Recurring_Transaction_Id__c, gwop__Item_Name__c, gwop__Payer_Email__c, ' +
                 ' gwop__Payer_ID__c, gwop__Payment_Amount__c, gwop__Payment_Status__c, gwop__Request__c from gwop__Payment_Notification__c ' + 
@@ -580,7 +580,7 @@ global virtual class PaymentListenerAuthnet {
                 ' ORDER BY gwop__transaction_type__c DESC LIMIT 10'       
         );
         id batchinstanceid = database.executeBatch (batch, 10);
-        test.stopTest();
+        System.test.stopTest();
 
         // verify that it was logged
         ipn = [select name, IsProcessed__c, Opportunity__c from payment_notification__c where 
