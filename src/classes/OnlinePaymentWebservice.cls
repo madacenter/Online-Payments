@@ -307,7 +307,7 @@ global virtual class OnlinePaymentWebservice {
 		insert new Contact(firstName = 'EvanTest', lastName = 'CallahanTest', 
 			email = 'evantest@groundwiretest.org');
 		
-		test.startTest();
+		System.test.startTest();
 		
         // set default setting for matching
         //gwop.opSettings.Dont_Match_Contacts_by_Email__c = false;

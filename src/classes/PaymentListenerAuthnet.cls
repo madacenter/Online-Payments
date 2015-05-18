@@ -47,7 +47,7 @@ global virtual class PaymentListenerAuthnet {
         
         // get settings - there are defaults for most of them if it isn't set
         opSettings = OnlinePaymentSettings__c.getInstance();
-        if (opSettings == null || test.isRunningTest()) opSettings = defaultSettings();
+        if (opSettings == null || System.test.isRunningTest()) opSettings = defaultSettings();
         
         if (opSettings.Auth_Net_TxnType_to_Hold_Processing__c != null) {
             for (string s : opSettings.Auth_Net_TxnType_to_Hold_Processing__c.split(';'))

@@ -209,7 +209,7 @@ global virtual class PaymentListenerPaypal {
 		}
 		
 		// when testing, force the batch to run now
-		if (test.isRunningTest()) {
+		if (System.test.isRunningTest()) {
 	        OnlinePaymentPaypalAsync batch = new OnlinePaymentPaypalAsync(); 
 			database.executeBatch(batch);			
 		} else {
