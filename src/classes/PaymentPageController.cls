@@ -367,7 +367,7 @@ global with sharing virtual class PaymentPageController {
         insert config;
 
         // setup dummy data
-        Test.setCurrentPage(Page.PaymentRefund);
+        System.Test.setCurrentPage(Page.PaymentRefund);
         ApexPages.currentPage().getParameters().put('action','refund');
         ApexPages.currentPage().getParameters().put('txnid','my txnid');
         ApexPages.currentPage().getParameters().put('amount','123.45');
