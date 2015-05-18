@@ -341,7 +341,7 @@ global virtual class OnlinePaymentWebservice {
 		insert new Contact(firstName = 'EvanTest', lastName = 'CallahanTest', 
 			email = 'evantest@groundwiretest.org');
 		
-		test.startTest();
+		System.test.startTest();
 		
 		OnlinePaymentWebservice.PaymentInfo p = new OnlinePaymentWebservice.PaymentInfo();
 		p.firstname = 'EvanTest';
